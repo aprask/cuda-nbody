@@ -362,7 +362,7 @@ int main(int argc, char* argv[]) {
   }
 
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - global_time).count();
-  std::cout << "\n\nDURATION: " << duration << std::endl;
+  std::cout << "\n\nDURATION: " << duration << "ms" << std::endl;
   CUDA_VERIF(cudaFree(s.d_mass));
   CUDA_VERIF(cudaFree(s.d_x));
   CUDA_VERIF(cudaFree(s.d_y));
