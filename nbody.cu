@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cuda_profiler_api.h>
 #include <cuda_runtime.h>
+#include <chrono>
 
 int threadsPerBlock = 128;
 
@@ -309,6 +310,7 @@ int main(int argc, char* argv[]) {
       }    
     }
 
+  auto global_time = std::chrono::high_resolution_clock::now();
   if (type == "cpu") {  
     for (size_t step = 0; step < nbstep; step++) {
       if (step % printevery == 0)
@@ -359,6 +361,8 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - global_time).count();
+  std::cout << "\n\nDURATION: " << duration << std::endl;
   CUDA_VERIF(cudaFree(s.d_mass));
   CUDA_VERIF(cudaFree(s.d_x));
   CUDA_VERIF(cudaFree(s.d_y));
