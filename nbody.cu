@@ -253,7 +253,7 @@ void update_forces_gpu(size_t n, double G, double* mass, double* x, double* y, d
     dz = dz/norm;
 
     // force mag
-    double F = (G * mass[i] * mass[j]) / (dist_sqr + softening);
+    double F = (G * mass[i] * mass[j]) / (dist_sq + softening);
 
     fxi += dx*F;
     fyi += dy*F;
